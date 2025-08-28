@@ -16,3 +16,8 @@ npm i
 npm i
 npm run dev
 ```
+
+### If required to start from scratch
+```bash
+
+```

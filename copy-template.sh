@@ -25,6 +25,12 @@ rm -rf backend/app/__pycache__
 rm -f backend/dev.db
 rm -f dev.db
 
+# Create .env file from template
+if [ -f "env.example" ]; then
+    cp env.example .env
+    echo "📝 Created .env file from template"
+fi
+
 # Initialize fresh git
 git init
 git add .

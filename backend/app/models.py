@@ -19,3 +19,11 @@ class TodoUpdate(SQLModel):
 class TodoRead(TodoBase):
     id: int
     done: bool
+
+class User(SQLModel, table=True):
+    __tablename__ = "users"
+    id: Optional[int] = Field(default=None, primary_key=True, index=True)
+    username: str = Field(unique=True, index=True)
+    email: str = Field(unique=True, index=True)
+    hashed_password: str = Field(default="")
+    is_active: bool = Field(default=True)
