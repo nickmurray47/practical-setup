@@ -1,8 +1,21 @@
-from sqlalchemy import Boolean, Column, Integer, String
-from .db import Base
+from sqlmodel import SQLModel, Field
+from typing import Optional
 
-class Todo(Base):
+class TodoBase(SQLModel):
+    text: str
+
+class Todo(TodoBase, table=True):
     __tablename__ = "todos"
-    id = Column(Integer, primary_key=True, index=True)
-    text = Column(String, nullable=False)
-    done = Column(Boolean, default=False)
+    id: Optional[int] = Field(default=None, primary_key=True, index=True)
+    done: bool = Field(default=False)
+
+class TodoCreate(TodoBase):
+    pass
+
+class TodoUpdate(SQLModel):
+    text: Optional[str] = None
+    done: Optional[bool] = None
+
+class TodoRead(TodoBase):
+    id: int
+    done: bool

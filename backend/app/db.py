@@ -1,17 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlmodel import SQLModel, create_engine, Session
 from .config import settings
-
-class Base(DeclarativeBase):
-    pass
 
 connect_args = {"check_same_thread": False} if settings.DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(settings.DATABASE_URL, echo=False, future=True, connect_args=connect_args)
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, future=True)
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
 
 def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    with Session(engine) as session:
+        yield session
