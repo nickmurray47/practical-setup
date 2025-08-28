@@ -1,5 +1,9 @@
 ### Getting Started
 ```bash
+# copy template over, installs one directory up
+./copy-template.sh [project_name]
+
+
 # from backend
 python -m venv .venv
 source .venv/bin/activate

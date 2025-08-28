@@ -4,4 +4,5 @@ __pycache__/
 backend/dev.db
 node_modules/
 dist/
+dev.db
 .DS_Store
